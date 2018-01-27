@@ -149,6 +149,10 @@ MonoBehaviour:
   profilerSpawn: {fileID: 1210498800481368, guid: b4ad7363323939040919611969a7a7ec,
     type: 2}
   isCop: 0
+  WhatToHit:
+    serializedVersion: 2
+    m_Bits: 0
+  bullet: {fileID: 1688651555298620, guid: 4ef9a1cbe534cd14fb7c91cbf205edc2, type: 2}
 --- !u!114 &114983077539136186
 MonoBehaviour:
   m_ObjectHideFlags: 1
