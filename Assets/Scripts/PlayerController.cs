@@ -15,6 +15,7 @@ public class PlayerController : NetworkBehaviour
     public LayerMask WhatToHit;
 
     private bool aiming;
+    private bool Degaine = true;
     public GameObject bullet;
 
     // Use this for initialization
@@ -48,6 +49,11 @@ public class PlayerController : NetworkBehaviour
         if (Input.GetMouseButton(1))
         {
             aiming = true;
+            if (Degaine)
+            {
+                SoundManager.GetSingleton.audioSources[6].Play();
+                Degaine = false;
+            }         
             if (Input.GetMouseButtonDown(0))
             {
                 Shoot();
@@ -57,6 +63,7 @@ public class PlayerController : NetworkBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             aiming = false;
+            Degaine = true;
         }
     }
 
@@ -80,6 +87,7 @@ public class PlayerController : NetworkBehaviour
 
     public void Shoot()
     {
+        SoundManager.GetSingleton.audioSources[7].Play();
         GameObject balle = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
         Rigidbody rb = balle.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * 100,ForceMode.Impulse);
