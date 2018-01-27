@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65419998248433882}
   - component: {fileID: 54270418116528592}
   m_Layer: 8
-  m_Name: News1-1
+  m_Name: News1-1_t
   m_TagString: News
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
