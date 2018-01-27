@@ -2,13 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour {
+public class SoundManager : MonoBehaviour
+{
+
+    private static SoundManager instance;
+    public static SoundManager GetSingleton
+    {
+        get { return instance; }
+    }
+
+    public void SetSingleton()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+            Destroy(gameObject);
+    }
+
+    private void Awake()
+    {
+        SetSingleton();
+    }
 
     public AudioClip[] Clips;
-    private AudioSource[] audioSources;
+    public AudioSource[] audioSources;
 
     // Use this for initialization
-    void Start () {
+    public void Start()
+    {
 
         audioSources = new AudioSource[Clips.Length];
         int i = 0;
@@ -25,9 +48,10 @@ public class SoundManager : MonoBehaviour {
             i++;
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }
