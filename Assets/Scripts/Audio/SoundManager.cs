@@ -1,7 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
+[System.Serializable]
+
+public struct ClipPerso{
+    public string name;
+    public AudioClip clip;
+    public AudioSource source;
+
+}
 public class SoundManager : MonoBehaviour
 {
 
@@ -26,27 +35,39 @@ public class SoundManager : MonoBehaviour
         SetSingleton();
     }
 
-    public AudioClip[] Clips;
-    public AudioSource[] audioSources;
+    public ClipPerso[] Clips;
+    //public AudioSource[] audioSources;
+
+    public AudioSource GetClipFromName(string name)
+    {
+        return Clips.FirstOrDefault(c => c.name == name).source;
+    }
 
     // Use this for initialization
     public void Start()
     {
-
-        audioSources = new AudioSource[Clips.Length];
-        int i = 0;
-        while (i < Clips.Length)
+        for (int i = 0; i < Clips.Length; i++)
         {
-            GameObject child = new GameObject("Player");
-
+            GameObject child = new GameObject("Playersound");
             child.transform.parent = gameObject.transform;
+            Clips[i].source = child.AddComponent<AudioSource>() as AudioSource;
+            Clips[i].source.clip = Clips[i].clip;
 
-            audioSources[i] = child.AddComponent<AudioSource>() as AudioSource;
-
-            audioSources[i].clip = Clips[i];
-
-            i++;
         }
+        //audioSources = new AudioSource[Clips.Length];
+        //int i = 0;
+        //while (i < Clips.Length)
+        //{
+        //    GameObject child = new GameObject("Player");
+
+        //    child.transform.parent = gameObject.transform;
+
+        //    audioSources[i] = child.AddComponent<AudioSource>() as AudioSource;
+
+        //    audioSources[i].clip = Clips[i].clips;
+
+        //    i++;
+        //}
     }
 
     // Update is called once per frame

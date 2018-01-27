@@ -25,7 +25,7 @@ public class Top_character_controller : MonoBehaviour
             aiming = true;
             if (Degaine)
             {
-                SoundManager.GetSingleton.audioSources[6].Play();
+                SoundManager.GetSingleton.GetClipFromName("Degaine").Play();
                 Degaine = false;
             }
             if (Input.GetMouseButtonDown(0))
@@ -59,8 +59,8 @@ public class Top_character_controller : MonoBehaviour
 
     public void Shoot()
     {
-        SoundManager.GetSingleton.audioSources[7].Play();
-        GameObject balle = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
+        SoundManager.GetSingleton.GetClipFromName("Shoot").Play();
+        GameObject balle = (GameObject)Instantiate(bullet, transform.position + transform.forward, transform.rotation);
         Rigidbody rb = balle.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * 100, ForceMode.Impulse);
         Destroy(balle, 1.0f);

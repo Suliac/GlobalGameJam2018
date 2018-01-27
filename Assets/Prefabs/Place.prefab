@@ -139,6 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7826efdf8b8e6b448ae2da12abc26739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NumberPlacesFoundBeforeActivation: 0
+  triggerOnEnter: 1
 --- !u!212 &212782324802464006
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -177,7 +179,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 1
   m_Size: {x: 13.5, y: 6.29}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0

@@ -18,7 +18,7 @@ public class City_Ambient_Sound : MonoBehaviour
     {
         if (isplayed)
         {
-            SoundManager.GetSingleton.audioSources[8].Play();
+            SoundManager.GetSingleton.GetClipFromName("Ambient").Play();
             isplayed = false;
         }
 

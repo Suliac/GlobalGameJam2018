@@ -16,6 +16,6 @@ public class Test_Sound : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        SoundManager.GetSingleton.audioSources[0].Play();
+        SoundManager.GetSingleton.GetClipFromName("Ambient").Play();
     }
 }

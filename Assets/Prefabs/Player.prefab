@@ -79,7 +79,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4247845099009982
 Transform:
   m_ObjectHideFlags: 1
@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9b7720863d666245a39efb0b1d272ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bullet: {fileID: 1688651555298620, guid: 4ef9a1cbe534cd14fb7c91cbf205edc2, type: 2}
 --- !u!114 &114466493650306452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -238,7 +239,6 @@ MonoBehaviour:
   profilerSpawn: {fileID: 1210498800481368, guid: b4ad7363323939040919611969a7a7ec,
     type: 2}
   isCop: 0
-  bullet: {fileID: 1688651555298620, guid: 4ef9a1cbe534cd14fb7c91cbf205edc2, type: 2}
 --- !u!114 &114983077539136186
 MonoBehaviour:
   m_ObjectHideFlags: 1
