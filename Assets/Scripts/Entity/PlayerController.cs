@@ -56,25 +56,7 @@ public class PlayerController : NetworkBehaviour
             }
         }
 
-        if (Input.GetMouseButton(1))
-        {
-            aiming = true;
-            if (Degaine)
-            {
-                SoundManager.GetSingleton.audioSources[6].Play();
-                Degaine = false;
-            }         
-            if (Input.GetMouseButtonDown(0))
-            {
-                Shoot();
-            }
-        }
-
-        if (Input.GetMouseButtonUp(1))
-        {
-            aiming = false;
-            Degaine = true;
-        }
+        
     }
 
 
@@ -90,6 +72,26 @@ public class PlayerController : NetworkBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             transform.position += new Vector3(HorizMove, 0, vertMove) * Time.deltaTime * CopSpeed;
+        }
+
+        if (Input.GetMouseButton(1))
+        {
+            aiming = true;
+            if (Degaine)
+            {
+                SoundManager.GetSingleton.audioSources[6].Play();
+                Degaine = false;
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                Shoot();
+            }
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            aiming = false;
+            Degaine = true;
         }
 
         LookMouseCursor();
@@ -203,12 +205,7 @@ public class PlayerController : NetworkBehaviour
         Camera.main.transform.position = profilerSpawn.transform.position;
         transform.position = new Vector3(profilerSpawn.transform.position.x, -1000, profilerSpawn.transform.position.y);
     }
-
-    public void AddNews()
-    {
-
-    }
-
+    
     public void ReorderNewsByPlaceInList()
     {
         // ex : si 3 news -> le dernier est au top -> y=3, puis y=2 ...
