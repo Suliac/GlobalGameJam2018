@@ -20,6 +20,12 @@ public class PlayerController : NetworkBehaviour
     private int indexNewsDragging = -1;
     private Vector3 lastMousePosition;
 
+    public LayerMask WhatToHit;
+
+    private bool aiming;
+    private bool Degaine = true;
+    public GameObject bullet;
+
     // Use this for initialization
     void Start()
     {
@@ -31,6 +37,7 @@ public class PlayerController : NetworkBehaviour
             CopInit();
         else // Profiler
             ProfilerInit();
+
     }
 
     // Update is called once per frame
@@ -48,33 +55,68 @@ public class PlayerController : NetworkBehaviour
                 ProfilerInput();
             }
         }
+
+        if (Input.GetMouseButton(1))
+        {
+            aiming = true;
+            if (Degaine)
+            {
+                SoundManager.GetSingleton.audioSources[6].Play();
+                Degaine = false;
+            }         
+            if (Input.GetMouseButtonDown(0))
+            {
+                Shoot();
+            }
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            aiming = false;
+            Degaine = true;
+        }
     }
+
 
     #region Cop behaviour
     public void CopInput()
     {
-        var vertMove = Input.GetAxisRaw("Vertical");
-        var HorizMove = Input.GetAxisRaw("Horizontal");
+        if (!aiming)
+        {
+            var vertMove = Input.GetAxisRaw("Vertical");
+            var HorizMove = Input.GetAxisRaw("Horizontal");
 
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        transform.position += new Vector3(HorizMove, 0, vertMove) * Time.deltaTime * CopSpeed;
+            transform.position += new Vector3(HorizMove, 0, vertMove) * Time.deltaTime * CopSpeed;
+        }
 
         LookMouseCursor();
     }
 
+    public void Shoot()
+    {
+        SoundManager.GetSingleton.audioSources[7].Play();
+        GameObject balle = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
+        Rigidbody rb = balle.GetComponent<Rigidbody>();
+        rb.AddForce(transform.forward * 100,ForceMode.Impulse);
+        Destroy(balle, 1.0f);
+    }
+
     void LookMouseCursor()
     {
-
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3 dir = Vector3.zero;
 
         if (Physics.Raycast(ray, out hit, 100))
         {
             transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
         }
+        
     }
+
 
     public void CopInit()
     {
@@ -154,6 +196,7 @@ public class PlayerController : NetworkBehaviour
         }
 
     }
+
     public void ProfilerInit()
     {
         isCop = false;
