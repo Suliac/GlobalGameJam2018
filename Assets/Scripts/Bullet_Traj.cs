@@ -18,7 +18,7 @@ public class Bullet_Traj : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("Pnj"))
         {
-            print("TOUCHE");
+            SoundManager.GetSingleton.audioSources[9].Play();
             Destroy(gameObject);
         }
     }
