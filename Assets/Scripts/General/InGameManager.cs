@@ -1,6 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
+[System.Serializable]
+public struct NewsForPlace
+{
+    public List<GameObject> newsPrefabs;
+}
 
 public class InGameManager : MonoBehaviour {
 
@@ -11,6 +18,10 @@ public class InGameManager : MonoBehaviour {
     {
         get { return instance; }
     }
+
+    public List<GameObject> newsPopPoint;
+    public List<NewsForPlace> newsPrefabs;
+    public GameObject profilerView;
 
     public int numberPlacesFound = 0;
     #endregion
@@ -44,9 +55,19 @@ public class InGameManager : MonoBehaviour {
     #endregion
 
     #region Core
-    public void PlaceFound()
+    public int PlaceFound()
     {
         numberPlacesFound++;
+        return numberPlacesFound;
+    }
+
+    public NewsForPlace GetNewsForPlace(int placeNumber)
+    {
+        var realIndex = placeNumber-1;
+        if (realIndex >= newsPrefabs.Count)
+            throw new System.Exception("numberPlace >= newsPrefabs.Count");
+
+        return newsPrefabs[realIndex];
     }
     #endregion
 }
