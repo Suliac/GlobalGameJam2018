@@ -36,14 +36,20 @@ public class PlayerController : NetworkBehaviour
     private Text textChrono;
     private bool needToLoose = false;
     private bool musicplayed = false;
+
+    public GameObject missionOrder;
     // Use this for initialization
     void Start()
     {
+        
+
         currentCountDown = countdown;
         camY = Camera.main.transform.position.y;
         spriteObject = transform.GetChild(0).gameObject;
         currentNews = new List<GameObject>();
         ani = GetComponentInChildren<Animator>();
+
+        
 
         Camera.main.orthographicSize = 6f;
         if (isServer)// Policier
@@ -363,6 +369,12 @@ public class PlayerController : NetworkBehaviour
 
         InGameManager.GetSingleton.countdownPanel.SetActive(true);
         textChrono = InGameManager.GetSingleton.countdownPanel.transform.GetChild(0).GetComponent<Text>();
+
+        if (!isServer && !isLocalPlayer)
+        {
+            GameObject newsJustPoped = Instantiate(missionOrder, InGameManager.GetSingleton.newsPopPoint[0].transform.position, Quaternion.Euler(90, 0, 0), InGameManager.GetSingleton.profilerView.transform);
+            currentNews.Add(newsJustPoped);
+        }
     }
 
     public void ReorderNewsByPlaceInList()
