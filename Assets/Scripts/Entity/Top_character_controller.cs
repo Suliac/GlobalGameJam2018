@@ -21,50 +21,52 @@ public class Top_character_controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ani.SetBool("Walk", true);
-        ani.SetBool("aim", false);
-        LookMouseCursor();
-
-        if (Input.GetMouseButton(1))
+        if (InGameManager.GetSingleton.State < GameState.Victory)
         {
-            ani.SetBool("Walk", false);
-            ani.SetBool("aim", true);
-            aiming = true;
-            if (Degaine)
+            ani.SetBool("Walk", true);
+            ani.SetBool("aim", false);
+            LookMouseCursor();
+
+            if (Input.GetMouseButton(1))
             {
-                SoundManager.GetSingleton.GetClipFromName("Degaine").Play();
-                Degaine = false;
+                ani.SetBool("Walk", false);
+                ani.SetBool("aim", true);
+                aiming = true;
+                if (Degaine)
+                {
+                    SoundManager.GetSingleton.GetClipFromName("Degaine").Play();
+                    Degaine = false;
+                }
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Shoot();
+                }
             }
-            if (Input.GetMouseButtonDown(0))
+
+            if (Input.GetMouseButtonUp(1))
             {
-                Shoot();
+                aiming = false;
+                Degaine = true;
             }
-        }
 
+            var vertMove = Input.GetAxisRaw("Vertical");
+            var HorizMove = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetMouseButtonUp(1))
-        {
-            aiming = false;
-            Degaine = true;
-        }
-
-        var vertMove = Input.GetAxisRaw("Vertical");
-        var HorizMove = Input.GetAxisRaw("Horizontal");
-
-        if (!aiming)
-        {
-            if (vertMove != 0 || HorizMove != 0)
+            if (!aiming)
             {
-                ani.SetBool("Walk", true);
+                if (vertMove != 0 || HorizMove != 0)
+                {
+                    ani.SetBool("Walk", true);
+                }
+                else
+                {
+                    ani.SetBool("Walk", false);
+                }
             }
             else
             {
                 ani.SetBool("Walk", false);
             }
-        }
-        else
-        {
-            ani.SetBool("Walk", false);
         }
     }
 
@@ -85,19 +87,24 @@ public class Top_character_controller : MonoBehaviour
 
     public void Shoot()
     {
-        bool isLastBullet = numberShoots == 1;
+        if (numberShoots > 0)
+        {
+            bool isLastBullet = numberShoots == 1;
 
-        SoundManager.GetSingleton.GetClipFromName("Shoot").Play();
-        GameObject balle = (GameObject)Instantiate(bullet, transform.position + transform.forward, transform.rotation);
+            SoundManager.GetSingleton.GetClipFromName("Shoot").Play();
+            GameObject balle = (GameObject)Instantiate(bullet, transform.position + transform.forward, transform.rotation);
 
-        Bullet_Traj bulletScript = balle.GetComponent<Bullet_Traj>();
-        bulletScript.source = GetComponentInParent<PlayerController>();
-        bulletScript.isLastShot = isLastBullet;
+            Bullet_Traj bulletScript = balle.GetComponent<Bullet_Traj>();
+            bulletScript.source = GetComponentInParent<PlayerController>();
+            bulletScript.isLastShot = isLastBullet;
 
-        Rigidbody rb = balle.GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * 100, ForceMode.Impulse);
-        Destroy(balle, 1.0f);
+            Rigidbody rb = balle.GetComponent<Rigidbody>();
+            rb.AddForce(transform.forward * 100, ForceMode.Impulse);
+            Destroy(balle, 1.0f);
 
-        numberShoots--;
+            numberShoots--;
+
+            InGameManager.GetSingleton.bullets[numberShoots].SetActive(false);
+        }
     }
 }

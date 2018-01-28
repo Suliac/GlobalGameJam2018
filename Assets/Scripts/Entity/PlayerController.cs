@@ -44,6 +44,7 @@ public class PlayerController : NetworkBehaviour
         currentNews = new List<GameObject>();
         ani = GetComponentInChildren<Animator>();
 
+        Camera.main.orthographicSize = 6f;
         if (isServer)// Policier
             CopInit();
         else // Profiler
@@ -58,13 +59,14 @@ public class PlayerController : NetworkBehaviour
         {
             if (isCop)
             {
-                CopInput();
+                if (InGameManager.GetSingleton.State < GameState.Victory)
+                    CopInput();
                 Camera.main.transform.position = new Vector3(transform.position.x, camY, transform.position.z);
             }
             else
             {
-                ProfilerInput();
-                Camera.main.orthographicSize = 5.5f;
+                if (InGameManager.GetSingleton.State < GameState.Victory)
+                    ProfilerInput();
             }
         }
         else if (isLocalPlayer && !isServer)
@@ -74,7 +76,7 @@ public class PlayerController : NetworkBehaviour
 
             if (lastSecond != currentSecond)
             {
-                if(currentCountDown <= 60)
+                if (currentCountDown <= 60)
                 {
                     // TODO : rythme
                 }
@@ -198,6 +200,7 @@ public class PlayerController : NetworkBehaviour
     {
         isCop = true;
         Camera.main.transform.position = copSpawn.transform.position;
+        InGameManager.GetSingleton.bulletPanel.SetActive(true);
         //Camera.main.transform.parent = transform;
     }
 
@@ -257,6 +260,8 @@ public class PlayerController : NetworkBehaviour
     public void Loose()
     {
         InGameManager.GetSingleton.gameOverPanel.SetActive(true);
+        InGameManager.GetSingleton.countdownPanel.SetActive(false);
+        InGameManager.GetSingleton.bulletPanel.SetActive(false);
         InGameManager.GetSingleton.State = GameState.Loose;
     }
     #endregion

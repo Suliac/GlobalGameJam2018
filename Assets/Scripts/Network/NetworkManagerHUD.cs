@@ -163,7 +163,7 @@ namespace UnityEngine.Networking
             var host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
             {
-                print("IP : " + ip.ToString());
+                //print("IP : " + ip.ToString());
                 if (ip.AddressFamily == AddressFamily.InterNetwork)
                 {
                     return ip.ToString();
