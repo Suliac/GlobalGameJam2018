@@ -79,6 +79,6 @@ MonoBehaviour:
   - name: Tick
     clip: {fileID: 8300000, guid: 6de496d660e5b4f4ebdedf0c0b9dbec4, type: 3}
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
+  - name: rush
+    clip: {fileID: 8300000, guid: aeb72b76796e91640a0ea4377f5b5122, type: 3}
     source: {fileID: 0}
