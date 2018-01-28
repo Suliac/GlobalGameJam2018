@@ -99,7 +99,7 @@ public class Top_character_controller : MonoBehaviour
             bulletScript.isLastShot = isLastBullet;
 
             Rigidbody rb = balle.GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 50, ForceMode.Impulse);
+            rb.AddForce(transform.forward * 25, ForceMode.Impulse);
             Destroy(balle, 1.0f);
 
             numberShoots--;
