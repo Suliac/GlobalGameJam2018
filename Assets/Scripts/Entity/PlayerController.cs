@@ -55,6 +55,7 @@ public class PlayerController : NetworkBehaviour
             else
             {
                 ProfilerInput();
+                Camera.main.orthographicSize = 5.5f;
             }
         }
 
@@ -181,6 +182,53 @@ public class PlayerController : NetworkBehaviour
         // TODO : ce qu'il se passe pour le policier a ce moment
         RpcEnterPlace(placeNumber);
     }
+    
+    [Command]
+    public void CmdWin()
+    {
+        if (!isServer)
+            return;
+        Win();
+        RpcWin();
+    }
+
+    [ClientRpc]
+    public void RpcWin()
+    {
+        if (isServer)
+            return;
+
+        Win();
+    }
+
+    public void Win()
+    {
+        InGameManager.GetSingleton.victoryPannel.SetActive(true);
+        InGameManager.GetSingleton.State = GameState.Victory;
+    }
+
+    [Command]
+    public void CmdLoose()
+    {
+        if (!isServer)
+            return;
+        Loose();
+        RpcLoose();
+    }
+
+    [ClientRpc]
+    public void RpcLoose()
+    {
+        if (isServer)
+            return;
+
+        Loose();
+    }
+    public void Loose()
+    {
+        InGameManager.GetSingleton.gameOverPanel.SetActive(true);
+        InGameManager.GetSingleton.State = GameState.Loose;
+    }
     #endregion
 
     #region Profiler behaviour
@@ -195,8 +243,10 @@ public class PlayerController : NetworkBehaviour
 
                 if (Physics.Raycast(ray, out hit, 100))
                 {
+                    //print("Hit !");
                     if (hit.collider.gameObject.CompareTag("News"))
                     {
+                        //print("Hit a news !");
                         string name = hit.collider.gameObject.name;
 
                         // Si on clique sur news
@@ -221,6 +271,7 @@ public class PlayerController : NetworkBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             indexNewsDragging = -1;
+            //print("reset");
         }
 
         if (indexNewsDragging > -1) // on est en train de drag
@@ -233,7 +284,7 @@ public class PlayerController : NetworkBehaviour
                 var newPosMouse = new Vector3(hit.point.x, 0, hit.point.z);
                 var diffPos = newPosMouse - lastMousePosition;
 
-                //print("Dragging from " + lastMousePosition + " to " + newPosMouse);
+                //print("Dragging "+ currentNews[indexNewsDragging].name + " from " + lastMousePosition + " to " + newPosMouse);
 
                 currentNews[indexNewsDragging].transform.position += diffPos;
                 lastMousePosition = newPosMouse;
@@ -269,10 +320,10 @@ public class PlayerController : NetworkBehaviour
         if (isServer)
             return; // already done by command
 
-        print("Recu event place");
+        //print("Recu event place");
         List<GameObject> newsToPop = new List<GameObject>(InGameManager.GetSingleton.GetNewsForPlace(numberPlace).newsPrefabs);
         List<GameObject> newsSpots = new List<GameObject>(InGameManager.GetSingleton.newsPopPoint);
-        for (int i = 0; i < newsSpots.Count; i++)
+        for (int i = 0; i < newsToPop.Count; i++)
         {
             GameObject newsJustPoped = Instantiate(newsToPop[i], newsSpots[i].transform.position, Quaternion.Euler(90, 0, 0), InGameManager.GetSingleton.profilerView.transform);
             currentNews.Add(newsJustPoped);

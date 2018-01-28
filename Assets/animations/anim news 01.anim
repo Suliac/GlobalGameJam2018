@@ -40,12 +40,12 @@ AnimationClip:
         time: 0
         value: {x: -14, y: 2.43, z: -0.41}
         inSlope: {x: 0, y: 0, z: 0}
-        outSlope: {x: 8.357447, y: 0, z: 0}
+        outSlope: {x: 8.357447, y: 0, z: -42.204258}
         tangentMode: 0
       - serializedVersion: 2
         time: 1.175
-        value: {x: -4.18, y: 2.43, z: -0.41}
-        inSlope: {x: 8.357447, y: -0, z: -0}
+        value: {x: -4.18, y: 2.43, z: -50}
+        inSlope: {x: 8.357447, y: -0, z: -42.204258}
         outSlope: {x: 4.91, y: 0, z: 0}
         tangentMode: 0
       m_PreInfinity: 2
@@ -149,12 +149,12 @@ AnimationClip:
         time: 0
         value: -0.41
         inSlope: 0
-        outSlope: 0
+        outSlope: -42.204258
         tangentMode: 69
       - serializedVersion: 2
         time: 1.175
-        value: -0.41
-        inSlope: -0
+        value: -50
+        inSlope: -42.204258
         outSlope: 0
         tangentMode: 69
       m_PreInfinity: 2
@@ -264,4 +264,11 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 1.1625
+    functionName: DisableAnimator
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

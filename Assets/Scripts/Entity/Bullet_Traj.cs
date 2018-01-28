@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet_Traj : MonoBehaviour {
+public class Bullet_Traj : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public PlayerController source;
+    public bool isLastShot = true; 
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -20,6 +26,25 @@ public class Bullet_Traj : MonoBehaviour {
         {
             SoundManager.GetSingleton.GetClipFromName("Dead").Play();
             Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Boss"))
+        {
+            if (source)
+            {
+                SoundManager.GetSingleton.GetClipFromName("Dead").Play();
+                Destroy(gameObject);
+                source.CmdWin();
+            }
+        }
+
+        if (isLastShot && !collision.gameObject.CompareTag("Boss"))
+        {
+            if (source)
+            {
+                Destroy(gameObject);
+                source.CmdLoose();
+            }
         }
     }
 }
