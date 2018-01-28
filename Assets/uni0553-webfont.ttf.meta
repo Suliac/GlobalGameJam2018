@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 14356ee61bc89eb4f9e55d337b867d01
+timeCreated: 1517098402
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: uni 05_53
+  fontNames:
+  - uni 05_53
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
