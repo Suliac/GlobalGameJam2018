@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -27,9 +29,17 @@ public class PlayerController : NetworkBehaviour
     public bool KeyGet = false;
     Animator ani;
 
+    public float countdown = 600.0f;
+    public float alertCountdown = 150.0f;
+    private float currentCountDown;
+    private double lastSecond = 0;
+    private Text textChrono;
+    private bool needToLoose = false;
+    private bool musicplayed = false;
     // Use this for initialization
     void Start()
     {
+        currentCountDown = countdown;
         camY = Camera.main.transform.position.y;
         spriteObject = transform.GetChild(0).gameObject;
         currentNews = new List<GameObject>();
@@ -58,10 +68,37 @@ public class PlayerController : NetworkBehaviour
                 Camera.main.orthographicSize = 5.5f;
             }
         }
+        else if (isLocalPlayer && !isServer)
+        {
+            currentCountDown -= Time.deltaTime;
+            var currentSecond = Math.Truncate(currentCountDown);
 
+            if (lastSecond != currentSecond)
+            {
+                if(currentCountDown <= 60)
+                {
+                    SoundManager.GetSingleton.GetClipFromName("Tick").Play();
 
+                    if (!musicplayed)
+                    {
+                        SoundManager.GetSingleton.GetClipFromName("rush").Play();
+                        musicplayed = true;
+                    }
+                }
+
+                currentCountDown = Mathf.Max(currentCountDown, 0);
+                TimeSpan t = TimeSpan.FromSeconds(currentCountDown);
+                textChrono.text = string.Format("{0:D2}:{1:D2}", t.Minutes, t.Seconds);
+            }
+
+            lastSecond = currentSecond;
+
+            if (InGameManager.GetSingleton.State < GameState.Victory && currentCountDown <= 0)
+            {
+                CmdLoose();
+            }
+        }
     }
-
 
     #region Cop behaviour
     public void CopInput()
@@ -74,11 +111,11 @@ public class PlayerController : NetworkBehaviour
 
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            
+
             Vector3 directionMove = new Vector3(HorizMove, 0, vertMove) * CopSpeed;
             CharacterController charaControl = GetComponent<CharacterController>();
 
-            charaControl.Move(directionMove*Time.deltaTime);
+            charaControl.Move(directionMove * Time.deltaTime);
 
             Transform leg = gameObject.transform.GetChild(0);
 
@@ -121,7 +158,7 @@ public class PlayerController : NetworkBehaviour
 
             if (HorizMove != 0 || vertMove != 0)
             {
-                StartCoroutine ("bruit");
+                StartCoroutine("bruit");
             }
 
             //spriteObject.transform.LookAt(dirleg);
@@ -182,7 +219,7 @@ public class PlayerController : NetworkBehaviour
         // TODO : ce qu'il se passe pour le policier a ce moment
         RpcEnterPlace(placeNumber);
     }
-    
+
     [Command]
     public void CmdWin()
     {
@@ -232,6 +269,11 @@ public class PlayerController : NetworkBehaviour
     #endregion
 
     #region Profiler behaviour
+    public void SetAlertTimer()
+    {
+        currentCountDown = Mathf.Min(currentCountDown, alertCountdown);
+    }
+
     public void ProfilerInput()
     {
         if (Input.GetMouseButtonDown(0))
@@ -298,6 +340,9 @@ public class PlayerController : NetworkBehaviour
         isCop = false;
         Camera.main.transform.position = profilerSpawn.transform.position;
         transform.position = new Vector3(profilerSpawn.transform.position.x, -1000, profilerSpawn.transform.position.y);
+
+        InGameManager.GetSingleton.countdownPanel.SetActive(true);
+        textChrono = InGameManager.GetSingleton.countdownPanel.transform.GetChild(0).GetComponent<Text>();
     }
 
     public void ReorderNewsByPlaceInList()

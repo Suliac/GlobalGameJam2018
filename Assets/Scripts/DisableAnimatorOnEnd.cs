@@ -15,4 +15,9 @@ public class DisableAnimatorOnEnd : MonoBehaviour
     {
         animator.enabled = false;
     }
+
+    void Playsoundjournal()
+    {
+        SoundManager.GetSingleton.GetClipFromName("Journaux_pop_up").Play();
+    }
 }
