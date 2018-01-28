@@ -23,8 +23,6 @@ public class PlayerController : NetworkBehaviour
     public LayerMask WhatToHit;
 
     private bool aiming;
-    private bool Degaine = true;
-    public GameObject bullet;
 
     // Use this for initialization
     void Start()
@@ -56,7 +54,7 @@ public class PlayerController : NetworkBehaviour
             }
         }
 
-        
+
     }
 
 
@@ -77,46 +75,13 @@ public class PlayerController : NetworkBehaviour
         if (Input.GetMouseButton(1))
         {
             aiming = true;
-            if (Degaine)
-            {
-                SoundManager.GetSingleton.audioSources[6].Play();
-                Degaine = false;
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
-                Shoot();
-            }
         }
 
         if (Input.GetMouseButtonUp(1))
         {
             aiming = false;
-            Degaine = true;
         }
 
-        LookMouseCursor();
-    }
-
-    public void Shoot()
-    {
-        SoundManager.GetSingleton.audioSources[7].Play();
-        GameObject balle = (GameObject)Instantiate(bullet, transform.position, transform.rotation);
-        Rigidbody rb = balle.GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * 100,ForceMode.Impulse);
-        Destroy(balle, 1.0f);
-    }
-
-    void LookMouseCursor()
-    {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Vector3 dir = Vector3.zero;
-
-        if (Physics.Raycast(ray, out hit, 100))
-        {
-            transform.LookAt(new Vector3(hit.point.x, transform.position.y, hit.point.z));
-        }
-        
     }
 
 
@@ -205,12 +170,12 @@ public class PlayerController : NetworkBehaviour
         Camera.main.transform.position = profilerSpawn.transform.position;
         transform.position = new Vector3(profilerSpawn.transform.position.x, -1000, profilerSpawn.transform.position.y);
     }
-    
+
     public void ReorderNewsByPlaceInList()
     {
         // ex : si 3 news -> le dernier est au top -> y=3, puis y=2 ...
         int currentY = currentNews.Count;
-        if(currentY > 0)
+        if (currentY > 0)
         {
             for (int i = currentY; i > 0; i--)
             {
@@ -234,7 +199,7 @@ public class PlayerController : NetworkBehaviour
             GameObject newsJustPoped = Instantiate(newsToPop[i], newsSpots[i].transform.position, Quaternion.Euler(90, 0, 0), InGameManager.GetSingleton.profilerView.transform);
             currentNews.Add(newsJustPoped);
         }
-        
+
         ReorderNewsByPlaceInList();
     }
 
