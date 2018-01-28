@@ -387,16 +387,6 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114983077539136186, guid: 35ea29b6e9c83644d9381b6d0b43e9ad,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 65156129881233722, guid: 35ea29b6e9c83644d9381b6d0b43e9ad,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 35ea29b6e9c83644d9381b6d0b43e9ad, type: 2}
   m_IsPrefabParent: 0
@@ -1341,7 +1331,10 @@ MonoBehaviour:
   newsPopPoint: []
   newsPrefabs: []
   profilerView: {fileID: 0}
+  victoryPannel: {fileID: 0}
+  gameOverPanel: {fileID: 0}
   numberPlacesFound: 0
+  State: 0
 --- !u!4 &1484512592
 Transform:
   m_ObjectHideFlags: 0
