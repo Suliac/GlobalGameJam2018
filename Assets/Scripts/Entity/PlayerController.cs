@@ -24,6 +24,7 @@ public class PlayerController : NetworkBehaviour
 
     private bool aiming;
     private bool marcheOK = true;
+    public bool KeyGet = false;
     Animator ani;
 
     // Use this for initialization
@@ -154,11 +155,12 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Building"))
+        if (collision.gameObject.CompareTag("PickUp"))
         {
-            print("lol");
+            KeyGet = true;
+            print(KeyGet);
         }
     }
 
