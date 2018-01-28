@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 1688651555298620, guid: 4ef9a1cbe534cd14fb7c91cbf205edc2, type: 2}
+  numberShoots: 3
 --- !u!114 &114466493650306452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -263,6 +264,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   KeyGet: 0
+  countdown: 10
 --- !u!114 &114983077539136186
 MonoBehaviour:
   m_ObjectHideFlags: 1
