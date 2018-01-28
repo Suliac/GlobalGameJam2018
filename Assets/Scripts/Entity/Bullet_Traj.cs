@@ -43,6 +43,8 @@ public class Bullet_Traj : MonoBehaviour
             if (source)
             {
                 SoundManager.GetSingleton.GetClipFromName("Dead").Play();
+                SpriteRenderer rend = collision.gameObject.GetComponent<SpriteRenderer>();
+                rend.sprite = RIP;
                 Destroy(gameObject);
                 source.CmdWin();
             }
