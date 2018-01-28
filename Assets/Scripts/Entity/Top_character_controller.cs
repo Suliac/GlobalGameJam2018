@@ -9,6 +9,7 @@ public class Top_character_controller : MonoBehaviour
     private bool Degaine = true;
     public GameObject bullet;
 
+    public int numberShoots = 3;
     Animator ani;
 
     // Use this for initialization
@@ -82,10 +83,19 @@ public class Top_character_controller : MonoBehaviour
 
     public void Shoot()
     {
+        bool isLastBullet = numberShoots == 1;
+
         SoundManager.GetSingleton.GetClipFromName("Shoot").Play();
         GameObject balle = (GameObject)Instantiate(bullet, transform.position + transform.forward, transform.rotation);
+
+        Bullet_Traj bulletScript = balle.GetComponent<Bullet_Traj>();
+        bulletScript.source = GetComponentInParent<PlayerController>();
+        bulletScript.isLastShot = isLastBullet;
+
         Rigidbody rb = balle.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * 100, ForceMode.Impulse);
         Destroy(balle, 1.0f);
+
+        numberShoots--;
     }
 }

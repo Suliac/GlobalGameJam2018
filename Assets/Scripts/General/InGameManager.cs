@@ -9,6 +9,14 @@ public struct NewsForPlace
     public List<GameObject> newsPrefabs;
 }
 
+public enum GameState
+{
+    InGame, 
+    Pause,
+    Victory,
+    Loose
+}
+
 public class InGameManager : MonoBehaviour {
 
     #region Attributes
@@ -22,8 +30,11 @@ public class InGameManager : MonoBehaviour {
     public List<GameObject> newsPopPoint;
     public List<NewsForPlace> newsPrefabs;
     public GameObject profilerView;
-
+    public GameObject victoryPannel;
+    public GameObject gameOverPanel;
     public int numberPlacesFound = 0;
+
+    public GameState State = GameState.InGame;
     #endregion
 
     #region Initialization

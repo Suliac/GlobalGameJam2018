@@ -54,6 +54,7 @@ public class PlayerController : NetworkBehaviour
             else
             {
                 ProfilerInput();
+                Camera.main.orthographicSize = 5.5f;
             }
         }
 
@@ -76,7 +77,7 @@ public class PlayerController : NetworkBehaviour
             Vector3 directionMove = new Vector3(HorizMove, 0, vertMove) * CopSpeed;
             CharacterController charaControl = GetComponent<CharacterController>();
 
-            charaControl.Move(directionMove.normalized*Time.deltaTime);
+            charaControl.Move(directionMove*Time.deltaTime);
 
             Transform leg = gameObject.transform.GetChild(0);
 
@@ -178,6 +179,53 @@ public class PlayerController : NetworkBehaviour
 
         // TODO : ce qu'il se passe pour le policier a ce moment
         RpcEnterPlace(placeNumber);
+    }
+    
+    [Command]
+    public void CmdWin()
+    {
+        if (!isServer)
+            return;
+        Win();
+        RpcWin();
+    }
+
+    [ClientRpc]
+    public void RpcWin()
+    {
+        if (isServer)
+            return;
+
+        Win();
+    }
+
+    public void Win()
+    {
+        InGameManager.GetSingleton.victoryPannel.SetActive(true);
+        InGameManager.GetSingleton.State = GameState.Victory;
+    }
+
+    [Command]
+    public void CmdLoose()
+    {
+        if (!isServer)
+            return;
+        Loose();
+        RpcLoose();
+    }
+
+    [ClientRpc]
+    public void RpcLoose()
+    {
+        if (isServer)
+            return;
+
+        Loose();
+    }
+    public void Loose()
+    {
+        InGameManager.GetSingleton.gameOverPanel.SetActive(true);
+        InGameManager.GetSingleton.State = GameState.Loose;
     }
     #endregion
 

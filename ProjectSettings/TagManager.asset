@@ -7,6 +7,8 @@ TagManager:
   - News
   - Pnj
   - Building
+  - PickUp
+  - Boss
   layers:
   - Default
   - TransparentFX
