@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4043164459348922}
-  - component: {fileID: 65419998248433882}
   - component: {fileID: 54270418116528592}
-  - component: {fileID: 95849996654949142}
+  - component: {fileID: 65256295347612494}
+  - component: {fileID: 95605705478689034}
   m_Layer: 8
-  m_Name: News1-2
+  m_Name: News2-1
   m_TagString: News
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +87,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!65 &65419998248433882
+--- !u!65 &65256295347612494
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -99,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: -0.7}
---- !u!95 &95849996654949142
+--- !u!95 &95605705478689034
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -108,7 +108,7 @@ Animator:
   m_GameObject: {fileID: 1299294449029554}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: af8a601658332f94fae609801b8af8a0, type: 2}
+  m_Controller: {fileID: 9100000, guid: dd83029af0166054abf67f4e5979f3af, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -150,7 +150,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8ace975a341249e4e8f5f233173cddc6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d7e723d43bbdc924092aa32f158d0ab3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

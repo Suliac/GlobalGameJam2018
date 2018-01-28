@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4043164459348922}
   - component: {fileID: 65419998248433882}
   - component: {fileID: 54270418116528592}
-  - component: {fileID: 95849996654949142}
+  - component: {fileID: 95571336580834370}
   m_Layer: 8
-  m_Name: News1-2
+  m_Name: News3-3
   m_TagString: News
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: -0.7}
---- !u!95 &95849996654949142
+--- !u!95 &95571336580834370
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -108,7 +108,7 @@ Animator:
   m_GameObject: {fileID: 1299294449029554}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: af8a601658332f94fae609801b8af8a0, type: 2}
+  m_Controller: {fileID: 9100000, guid: d504051494f9e0a42a45ad176f8e56b2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -150,7 +150,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8ace975a341249e4e8f5f233173cddc6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c14dcba5db8d34647b26f7f286160cfe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
