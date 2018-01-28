@@ -35,6 +35,7 @@ public class PlayerController : NetworkBehaviour
     private double lastSecond = 0;
     private Text textChrono;
     private bool needToLoose = false;
+    private bool musicplayed = false;
     // Use this for initialization
     void Start()
     {
@@ -76,7 +77,13 @@ public class PlayerController : NetworkBehaviour
             {
                 if(currentCountDown <= 60)
                 {
-                    // TODO : rythme
+                    SoundManager.GetSingleton.GetClipFromName("Tick").Play();
+
+                    if (!musicplayed)
+                    {
+                        SoundManager.GetSingleton.GetClipFromName("rush").Play();
+                        musicplayed = true;
+                    }
                 }
 
                 currentCountDown = Mathf.Max(currentCountDown, 0);
