@@ -24,6 +24,7 @@ public class PlayerController : NetworkBehaviour
 
     private bool aiming;
     private bool marcheOK = true;
+    public bool KeyGet = false;
     Animator ani;
 
     // Use this for initialization
@@ -76,7 +77,7 @@ public class PlayerController : NetworkBehaviour
             Vector3 directionMove = new Vector3(HorizMove, 0, vertMove) * CopSpeed;
             CharacterController charaControl = GetComponent<CharacterController>();
 
-            charaControl.Move(directionMove.normalized*Time.deltaTime);
+            charaControl.Move(directionMove*Time.deltaTime);
 
             Transform leg = gameObject.transform.GetChild(0);
 
@@ -153,11 +154,12 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Building"))
+        if (collision.gameObject.CompareTag("PickUp"))
         {
-            print("lol");
+            KeyGet = true;
+            print(KeyGet);
         }
     }
 
