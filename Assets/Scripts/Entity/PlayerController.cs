@@ -72,8 +72,11 @@ public class PlayerController : NetworkBehaviour
 
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            
+            Vector3 directionMove = new Vector3(HorizMove, 0, vertMove) * CopSpeed;
+            CharacterController charaControl = GetComponent<CharacterController>();
 
-            transform.position += new Vector3(HorizMove, 0, vertMove) * Time.deltaTime * CopSpeed;
+            charaControl.Move(directionMove.normalized*Time.deltaTime);
 
             Transform leg = gameObject.transform.GetChild(0);
 
