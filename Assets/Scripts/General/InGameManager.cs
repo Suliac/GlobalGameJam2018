@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public struct NewsForPlace
@@ -32,6 +33,8 @@ public class InGameManager : MonoBehaviour {
     public GameObject profilerView;
     public GameObject victoryPannel;
     public GameObject gameOverPanel;
+    public GameObject countdownPanel;
+    public Text timerText;
     public int numberPlacesFound = 0;
 
     public GameState State = GameState.InGame;

@@ -264,6 +264,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   KeyGet: 0
+  countdown: 600
 --- !u!114 &114983077539136186
 MonoBehaviour:
   m_ObjectHideFlags: 1
