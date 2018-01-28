@@ -23,6 +23,8 @@ public class PlayerController : NetworkBehaviour
     public LayerMask WhatToHit;
 
     private bool aiming;
+    private bool marcheOK = true;
+    Animator ani;
 
     // Use this for initialization
     void Start()
@@ -30,6 +32,7 @@ public class PlayerController : NetworkBehaviour
         camY = Camera.main.transform.position.y;
         spriteObject = transform.GetChild(0).gameObject;
         currentNews = new List<GameObject>();
+        ani = GetComponentInChildren<Animator>();
 
         if (isServer)// Policier
             CopInit();
@@ -61,15 +64,70 @@ public class PlayerController : NetworkBehaviour
     #region Cop behaviour
     public void CopInput()
     {
+        var vertMove = Input.GetAxisRaw("Vertical");
+        var HorizMove = Input.GetAxisRaw("Horizontal");
+
         if (!aiming)
         {
-            var vertMove = Input.GetAxisRaw("Vertical");
-            var HorizMove = Input.GetAxisRaw("Horizontal");
 
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            
+            Vector3 directionMove = new Vector3(HorizMove, 0, vertMove) * CopSpeed;
+            CharacterController charaControl = GetComponent<CharacterController>();
 
-            transform.position += new Vector3(HorizMove, 0, vertMove) * Time.deltaTime * CopSpeed;
+            charaControl.Move(directionMove.normalized*Time.deltaTime);
+
+            Transform leg = gameObject.transform.GetChild(0);
+
+            if (vertMove != 0 || HorizMove != 0)
+            {
+                ani.SetBool("Walk", true);
+            }
+            else
+            {
+                ani.SetBool("Walk", false);
+            }
+
+            Vector3 dirleg = transform.position;
+            if (HorizMove > 0)
+            {
+                Vector3 vec = new Vector3(leg.rotation.x + 90, leg.rotation.y, leg.rotation.z + 90);
+                leg.rotation = Quaternion.Euler(vec);
+                //dirleg += new Vector3(0, 0, 1);
+            }
+            else if (HorizMove < 0)
+            {
+                Vector3 vec = new Vector3(leg.rotation.x + 90, leg.rotation.y, leg.rotation.z + 90);
+                leg.rotation = Quaternion.Euler(vec);
+                //dirleg -= new Vector3(0, 0, 1);
+            }
+
+            if (vertMove > 0)
+            {
+                Vector3 vec = new Vector3(leg.rotation.x + 90, leg.rotation.y, leg.rotation.z);
+                leg.rotation = Quaternion.Euler(vec);
+                //dirleg += transform.up;
+            }
+
+            else if (vertMove < 0)
+            {
+                Vector3 vec = new Vector3(leg.rotation.x - 90, leg.rotation.y, leg.rotation.z);
+                leg.rotation = Quaternion.Euler(vec);
+                //dirleg -= transform.up;
+            }
+
+            if (HorizMove != 0 || vertMove != 0)
+            {
+                StartCoroutine ("bruit");
+            }
+
+            //spriteObject.transform.LookAt(dirleg);
+
+        }
+        else
+        {
+            ani.SetBool("Walk", false);
         }
 
         if (Input.GetMouseButton(1))
@@ -84,6 +142,24 @@ public class PlayerController : NetworkBehaviour
 
     }
 
+    IEnumerator bruit()
+    {
+        if (marcheOK)
+        {
+            marcheOK = false;
+            SoundManager.GetSingleton.GetClipFromName("Pas").Play();
+            yield return new WaitForSeconds(.3f);
+            marcheOK = true;
+        }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Building"))
+        {
+            print("lol");
+        }
+    }
 
     public void CopInit()
     {
@@ -117,8 +193,10 @@ public class PlayerController : NetworkBehaviour
 
                 if (Physics.Raycast(ray, out hit, 100))
                 {
+                    //print("Hit !");
                     if (hit.collider.gameObject.CompareTag("News"))
                     {
+                        //print("Hit a news !");
                         string name = hit.collider.gameObject.name;
 
                         // Si on clique sur news
@@ -143,6 +221,7 @@ public class PlayerController : NetworkBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             indexNewsDragging = -1;
+            //print("reset");
         }
 
         if (indexNewsDragging > -1) // on est en train de drag
@@ -155,7 +234,7 @@ public class PlayerController : NetworkBehaviour
                 var newPosMouse = new Vector3(hit.point.x, 0, hit.point.z);
                 var diffPos = newPosMouse - lastMousePosition;
 
-                //print("Dragging from " + lastMousePosition + " to " + newPosMouse);
+                //print("Dragging "+ currentNews[indexNewsDragging].name + " from " + lastMousePosition + " to " + newPosMouse);
 
                 currentNews[indexNewsDragging].transform.position += diffPos;
                 lastMousePosition = newPosMouse;
@@ -191,10 +270,10 @@ public class PlayerController : NetworkBehaviour
         if (isServer)
             return; // already done by command
 
-        print("Recu event place");
+        //print("Recu event place");
         List<GameObject> newsToPop = new List<GameObject>(InGameManager.GetSingleton.GetNewsForPlace(numberPlace).newsPrefabs);
         List<GameObject> newsSpots = new List<GameObject>(InGameManager.GetSingleton.newsPopPoint);
-        for (int i = 0; i < newsSpots.Count; i++)
+        for (int i = 0; i < newsToPop.Count; i++)
         {
             GameObject newsJustPoped = Instantiate(newsToPop[i], newsSpots[i].transform.position, Quaternion.Euler(90, 0, 0), InGameManager.GetSingleton.profilerView.transform);
             currentNews.Add(newsJustPoped);

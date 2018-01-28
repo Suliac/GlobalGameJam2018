@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4781761186112590}
   - component: {fileID: 212482239383353766}
+  - component: {fileID: 95646918521297886}
   m_Layer: 0
   m_Name: Player_Buste
   m_TagString: Untagged
@@ -73,6 +74,7 @@ GameObject:
   - component: {fileID: 114779883014994418}
   - component: {fileID: 54366526435050372}
   - component: {fileID: 114983077539136186}
+  - component: {fileID: 143193538579658474}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -160,8 +162,25 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.19, y: 1.85, z: 0.20000005}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.88, y: 1.85, z: 0.89}
+  m_Center: {x: 0, y: 0, z: -0.01}
+--- !u!95 &95646918521297886
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1258792753753978}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e5ff7e5453aa8474286b8448fd665006, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!95 &95729399311524674
 Animator:
   serializedVersion: 3
@@ -238,7 +257,11 @@ MonoBehaviour:
   copSpawn: {fileID: 1560158231407192, guid: f5489108d79ebc846adbd8483541aad3, type: 2}
   profilerSpawn: {fileID: 1210498800481368, guid: b4ad7363323939040919611969a7a7ec,
     type: 2}
+  currentNews: []
   isCop: 0
+  WhatToHit:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114983077539136186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -260,6 +283,23 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!143 &143193538579658474
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1745853579634428}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &212045491840832250
 SpriteRenderer:
   m_ObjectHideFlags: 1
