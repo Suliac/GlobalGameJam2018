@@ -22,7 +22,8 @@ public class Door_Behaviour : MonoBehaviour {
         {
             if (playercontroller.KeyGet)
             {
-                print("ouvert");
+                SoundManager.GetSingleton.GetClipFromName("Door").Play();
+                Destroy(gameObject);
             }
         }
     }

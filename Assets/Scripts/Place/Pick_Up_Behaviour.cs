@@ -21,6 +21,7 @@ public class Pick_Up_Behaviour : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Player"))
         {
+            SoundManager.GetSingleton.GetClipFromName("PickUp").Play();
             Destroy(gameObject);
         }
     }
