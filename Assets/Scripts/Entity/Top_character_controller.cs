@@ -22,11 +22,13 @@ public class Top_character_controller : MonoBehaviour
     void Update()
     {
         ani.SetBool("Walk", true);
+        ani.SetBool("aim", false);
         LookMouseCursor();
 
         if (Input.GetMouseButton(1))
         {
             ani.SetBool("Walk", false);
+            ani.SetBool("aim", true);
             aiming = true;
             if (Degaine)
             {
