@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33145967240772312}
   - component: {fileID: 135033684122163926}
   - component: {fileID: 23457988603766646}
-  - component: {fileID: 114982553733210698}
   - component: {fileID: 54778885258549682}
   - component: {fileID: 114825020880224936}
   m_Layer: 0
@@ -114,19 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 0}
   isLastShot: 1
---- !u!114 &114982553733210698
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1688651555298620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6795e61f6fd70546880a78726e436f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 0}
-  isLastShot: 1
+  RIP: {fileID: 21300000, guid: 36dd1171dc88e684cba0356ee2040cd1, type: 3}
 --- !u!135 &135033684122163926
 SphereCollider:
   m_ObjectHideFlags: 1

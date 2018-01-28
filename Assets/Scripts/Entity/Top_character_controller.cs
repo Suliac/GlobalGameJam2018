@@ -66,6 +66,7 @@ public class Top_character_controller : MonoBehaviour
         {
             ani.SetBool("Walk", false);
         }
+
     }
 
     void LookMouseCursor()
