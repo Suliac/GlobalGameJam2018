@@ -6,6 +6,7 @@ TagManager:
   tags:
   - News
   - Pnj
+  - Building
   layers:
   - Default
   - TransparentFX

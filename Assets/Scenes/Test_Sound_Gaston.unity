@@ -702,9 +702,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1241985191}
   - component: {fileID: 1241985190}
+  - component: {fileID: 1241985192}
+  - component: {fileID: 1241985193}
   m_Layer: 0
   m_Name: Buildings
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -766,6 +768,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!65 &1241985192
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1241985189}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.1, y: 6.1200013, z: 4.07}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1241985193
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1241985189}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1245259482
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,8 +991,8 @@ MonoBehaviour:
   - name: Dead
     clip: {fileID: 8300000, guid: 32cf7a124ed3fd04ba4ec4295f5b9404, type: 3}
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
+  - name: Pas
+    clip: {fileID: 8300000, guid: 54d9552d53534044392b1a37fc8dcf69, type: 3}
     source: {fileID: 0}
   - name: 
     clip: {fileID: 0}

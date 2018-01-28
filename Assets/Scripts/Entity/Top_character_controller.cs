@@ -9,19 +9,23 @@ public class Top_character_controller : MonoBehaviour
     private bool Degaine = true;
     public GameObject bullet;
 
+    Animator ani;
+
     // Use this for initialization
     void Start()
     {
-
+        ani = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        ani.SetBool("Walk", true);
         LookMouseCursor();
 
         if (Input.GetMouseButton(1))
         {
+            ani.SetBool("Walk", false);
             aiming = true;
             if (Degaine)
             {
@@ -39,6 +43,25 @@ public class Top_character_controller : MonoBehaviour
         {
             aiming = false;
             Degaine = true;
+        }
+
+        var vertMove = Input.GetAxisRaw("Vertical");
+        var HorizMove = Input.GetAxisRaw("Horizontal");
+
+        if (!aiming)
+        {
+            if (vertMove != 0 || HorizMove != 0)
+            {
+                ani.SetBool("Walk", true);
+            }
+            else
+            {
+                ani.SetBool("Walk", false);
+            }
+        }
+        else
+        {
+            ani.SetBool("Walk", false);
         }
     }
 
