@@ -6,7 +6,8 @@ public class Bullet_Traj : MonoBehaviour
 {
 
     public PlayerController source;
-    public bool isLastShot = true; 
+    public bool isLastShot = true;
+    public Sprite RIP;
 
     // Use this for initialization
     void Start()
@@ -24,7 +25,16 @@ public class Bullet_Traj : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Pnj"))
         {
+            print("touché");
             SoundManager.GetSingleton.GetClipFromName("Dead").Play();
+            SpriteRenderer rend = collision.gameObject.GetComponent<SpriteRenderer>();
+            Animator ani = collision.gameObject.GetComponentInChildren<Animator>();
+            if (ani)
+            {
+                ani.enabled = false;
+            }
+            rend.sprite = RIP;
+
             Destroy(gameObject);
         }
 

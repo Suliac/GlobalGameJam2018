@@ -179,6 +179,21 @@ public class PlayerController : NetworkBehaviour
             aiming = false;
         }
 
+        if (!musicplayed)
+        {
+            SoundManager.GetSingleton.GetClipFromName("Ambient").Play();
+            StartCoroutine("Ambient2");
+        }
+     
+    }
+
+
+    IEnumerator Ambient2()
+    {
+        musicplayed = true;
+        //SoundManager.GetSingleton.GetClipFromName("Ambient").Play();
+        yield return new WaitForSeconds(50f);
+        musicplayed = false;
     }
 
     IEnumerator bruit()
