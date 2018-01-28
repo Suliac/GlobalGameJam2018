@@ -76,8 +76,8 @@ MonoBehaviour:
   - name: Pas
     clip: {fileID: 8300000, guid: 54d9552d53534044392b1a37fc8dcf69, type: 3}
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
+  - name: Tick
+    clip: {fileID: 8300000, guid: 6de496d660e5b4f4ebdedf0c0b9dbec4, type: 3}
     source: {fileID: 0}
   - name: 
     clip: {fileID: 0}
