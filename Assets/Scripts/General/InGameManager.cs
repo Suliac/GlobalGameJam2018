@@ -34,6 +34,7 @@ public class InGameManager : MonoBehaviour {
     public GameObject victoryPannel;
     public GameObject gameOverPanel;
     public GameObject countdownPanel;
+    public GameObject textIp;
     public Text timerText;
     public int numberPlacesFound = 0;
 
