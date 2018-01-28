@@ -56,7 +56,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 4dd3c1633821f3b4da9cd1620634104b, type: 3}
     source: {fileID: 0}
   - name: Ambient
-    clip: {fileID: 8300000, guid: 0c953faaf9c787d449277267fdc43355, type: 3}
+    clip: {fileID: 8300000, guid: ef6deff6e62d01e4b84e79673d4d4e1c, type: 3}
     source: {fileID: 0}
   - name: Degaine
     clip: {fileID: 8300000, guid: f136a50174efe594da8133d2bcdabfed, type: 3}
@@ -76,9 +76,9 @@ MonoBehaviour:
   - name: Pas
     clip: {fileID: 8300000, guid: 54d9552d53534044392b1a37fc8dcf69, type: 3}
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
+  - name: Tick
+    clip: {fileID: 8300000, guid: 6de496d660e5b4f4ebdedf0c0b9dbec4, type: 3}
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
+  - name: rush
+    clip: {fileID: 8300000, guid: aeb72b76796e91640a0ea4377f5b5122, type: 3}
     source: {fileID: 0}
